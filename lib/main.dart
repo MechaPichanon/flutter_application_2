@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_2/EV_cal.dart';
+import 'package:flutter_application_2/about_us_page.dart';
+import 'package:flutter_application_2/welcome_page.dart';
 
 void main() {
   runApp(const MyApp());
@@ -10,39 +13,13 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-        debugShowCheckedModeBanner: false,
-        // theme: ThemeData(
-        //   useMaterial3: true,
-        //   appBarTheme: AppBarTheme(color: Colors.lightGreenAccent[700]),
-        // ),
-        home: Scaffold(
-          appBar: AppBar(
-            title: Text("EV Charging"),
-          ),
-          body: Padding(padding: const EdgeInsets.all(15),
-          child: Column(
-            children: [
-              const Row(
-                children: [
-                  Text("   "),
-                ],
-              ),
-              Image.asset('assets/images/EvCar.png'),
-              Text("Tesla Model EX",textAlign: TextAlign.center,style: TextStyle(fontSize: 26, fontWeight: FontWeight.bold),),
-              const Row(children: [
-                Card(
-                  child: Row(
-                    children: [
-                      Icon(Icons.electric_bolt),
-                      Text("38%"),
-                    ],
-                  ),
-                ),
-              ],)
-            ],
-          ),
-          ),
-        )
+      debugShowCheckedModeBanner: false,
+      theme: ThemeData(
+        useMaterial3: true,
+        appBarTheme: AppBarTheme(color: Colors.white),
+      ),
+      home: const EvCal(),
+      //home: const WelcomePage(),
     );
   }
 }
