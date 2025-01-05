@@ -1,7 +1,28 @@
 import 'package:flutter/material.dart';
 
-class EvCal extends StatelessWidget {
+class EvCal extends StatefulWidget {
   const EvCal({super.key});
+
+  @override
+  State<EvCal> createState() => _Calculate();
+}
+
+class _Calculate extends State<EvCal> {
+  final TextEditingController _controller1 = TextEditingController();
+  final TextEditingController _controller2 = TextEditingController();
+  final TextEditingController _controller3 = TextEditingController();
+  final TextEditingController _controller4 = TextEditingController();
+  double _result = 0.0;
+
+  void _calculateCharge() {
+    setState(() {
+      double Target = double.tryParse(_controller1.text) ?? 0.0;
+      double Bat_cap = double.tryParse(_controller2.text) ?? 0.0;
+      double Charge_Pow = double.tryParse(_controller3.text) ?? 0.0;
+      double Eff = double.tryParse(_controller4.text) ?? 0.0;
+      _result = (Target * (Bat_cap/100)) / (Charge_Pow * Eff);
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -18,7 +39,11 @@ class EvCal extends StatelessWidget {
                 Text("   "),
               ],
             ),
-            Image.asset('assets/images/EvCar.png'),
+            SizedBox(
+              width: 1000,
+              height: 150,
+              child: Image.asset('assets/images/EvCar2.png'),
+            ),
             const Text(
               "Tesla Model EX",
               textAlign: TextAlign.center,
@@ -28,27 +53,61 @@ class EvCal extends StatelessWidget {
               children: [
                 Card(
                   child: SizedBox(
+                    width: 370,
+                    height: 70,
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text("Current Soc(%)",style: TextStyle(fontSize: 18),),
+                        Text("36%",style: TextStyle(fontSize: 18),),
+                      ],
+                    ),
+                  ),
+                ),
+              ],
+            ),
+            const Row(
+              children: [Text("          ")],
+            ),
+            Row(
+              children: [
+                Card(
+                  margin: EdgeInsets.zero,
+                  child: SizedBox(
                     width: 150,
                     height: 100,
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Text("Current Soc(%)"),
-                        Text("36%"),
+                        const Text("Target Soc(%)"),
+                        TextField(
+                          controller: _controller1,
+                          keyboardType: TextInputType.number,
+                          decoration: const InputDecoration(
+                            hintText: "Enter Target SOC",
+                          ),
+                        ),
                       ],
                     ),
                   ),
                 ),
                 Spacer(),
                 Card(
+                  margin: EdgeInsets.zero,
                   child: SizedBox(
                     width: 150,
                     height: 100,
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Text("Target Soc(%)"),
-                        Text("100%"),
+                        const Text("Bat_Capacity (kWh)"),
+                        TextField(
+                          controller: _controller2,
+                          keyboardType: TextInputType.number,
+                          decoration: const InputDecoration(
+                            hintText: "Enter BatteryCap",
+                          ),
+                        ),
                       ],
                     ),
                   ),
@@ -58,18 +117,45 @@ class EvCal extends StatelessWidget {
             const Row(
               children: [Text("          ")],
             ),
-            const Row(
+            Row(
               children: [
                 Card(
                   margin: EdgeInsets.zero,
                   child: SizedBox(
-                    width: 380,
-                    height: 70,
+                    width: 150,
+                    height: 100,
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Text("Charging Time (hrs)"),
-                        Text("7.03"),
+                        const Text("Charging Power(kWh)"),
+                        TextField(
+                          controller: _controller3,
+                          keyboardType: TextInputType.number,
+                          decoration: const InputDecoration(
+                            hintText: "Enter ChargePower",
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+                Spacer(),
+                Card(
+                  margin: EdgeInsets.zero,
+                  child: SizedBox(
+                    width: 150,
+                    height: 100,
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        const Text("Efficiency (%)"),
+                        TextField(
+                          controller: _controller4,
+                          keyboardType: TextInputType.number,
+                          decoration: const InputDecoration(
+                            hintText: "Enter Efficiency",
+                          ),
+                        ),
                       ],
                     ),
                   ),
@@ -79,47 +165,25 @@ class EvCal extends StatelessWidget {
             const Row(
               children: [Text("          ")],
             ),
-            const Card(
+            ElevatedButton(
+              onPressed: _calculateCharge,
+              child: Text('Calculate'),
+            ),
+            Card(
               child: Padding(
-                padding: EdgeInsets.all(15),
-                child: Column(
-                  children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text("Charging Rate (A)"),
-                        Text("18.4"),
-                      ],
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text("Voltage (V)"),
-                        Text("225"),
-                      ],
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text("Charging Power (kWh)"),
-                        Text("4.140"),
-                      ],
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text("Bat Capacity (kWh)"),
-                        Text("38.5"),
-                      ],
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text("Efficiency %"),
-                        Text("0.84"),
-                      ],
-                    ),
-                  ],
+                padding: const EdgeInsets.all(16.0),
+                child: SizedBox(
+                  width: 370,
+                  height: 50,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                        'Charging Time: ${_result.toStringAsFixed(3)} hrs',
+                        style: TextStyle(fontSize: 18),
+                      ),
+                    ],
+                  ),
                 ),
               ),
             ),
@@ -128,4 +192,5 @@ class EvCal extends StatelessWidget {
       ),
     );
   }
+
 }
