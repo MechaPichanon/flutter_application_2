@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_2/about_us_page.dart';
+import 'package:flutter_application_2/welcome_page.dart';
 
 class EvCal extends StatefulWidget {
   const EvCal({super.key});
@@ -20,7 +22,7 @@ class _Calculate extends State<EvCal> {
       double Bat_cap = double.tryParse(_controller2.text) ?? 0.0;
       double Charge_Pow = double.tryParse(_controller3.text) ?? 0.0;
       double Eff = double.tryParse(_controller4.text) ?? 0.0;
-      _result = (Target * (Bat_cap/100)) / (Charge_Pow * Eff);
+      _result = (Target * (Bat_cap / 100)) / (Charge_Pow * Eff);
     });
   }
 
@@ -29,6 +31,18 @@ class _Calculate extends State<EvCal> {
     return Scaffold(
       appBar: AppBar(
         title: Text("EV Charging"),
+        actions: [
+          ElevatedButton(
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const AboutUsPage(),
+                  ),
+                );
+              },
+              child: const Icon(Icons.info))
+        ],
       ),
       body: Padding(
         padding: const EdgeInsets.all(15),
@@ -58,8 +72,14 @@ class _Calculate extends State<EvCal> {
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Text("Current Soc(%)",style: TextStyle(fontSize: 18),),
-                        Text("36%",style: TextStyle(fontSize: 18),),
+                        Text(
+                          "Current Soc(%)",
+                          style: TextStyle(fontSize: 18),
+                        ),
+                        Text(
+                          "36%",
+                          style: TextStyle(fontSize: 18),
+                        ),
                       ],
                     ),
                   ),
@@ -192,5 +212,4 @@ class _Calculate extends State<EvCal> {
       ),
     );
   }
-
 }

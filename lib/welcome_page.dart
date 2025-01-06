@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_2/EV_cal.dart';
+import 'package:flutter_application_2/about_us_page.dart';
+import 'package:flutter_application_2/Enter_name.dart';
 
 class WelcomePage extends StatefulWidget {
   const WelcomePage({super.key});
@@ -17,29 +20,40 @@ class _WelcomePageState extends State<WelcomePage> {
         centerTitle: true,
         title: Text("HOME"),
       ),
-      body: Center(
+      body: Padding(
+        padding: EdgeInsets.all(15),
         child: Column(
-        children: [
-          Column(
-            children: [
-              const Text("Hello"),
-              TextField(
-                controller: _textController,
-                decoration: const InputDecoration(
-                  hintText: "Enter Your Name",
-                  labelText: "Name",
+          children: [
+            Row(
+              children: [
+                IconButton(
+                  onPressed: () {
+                    Navigator.pushNamed(context, '/aboutUsPage');
+                  },
+                  icon: Icon(Icons.info),
+                  iconSize: 40,
                 ),
-              ),
-              Text("$_output"),
-              ElevatedButton(
-                onPressed: (){String input = _textController.text;setState(() {
-                  _output = "Hello and Welcome";debugPrint("press");
-                });}, child: const Icon(Icons.devices)),
-            ],
-          ),
-        ],
+                Spacer(),
+                IconButton(
+                  onPressed: () {
+                    Navigator.pushNamed(context, '/Entername');
+                  },
+                  icon: Icon(Icons.abc),
+                  iconSize: 40,
+                ),
+                Spacer(),
+                IconButton(
+                  onPressed: () {
+                    Navigator.pushNamed(context, '/Evcal');
+                  },
+                  icon: Icon(Icons.battery_6_bar),
+                  iconSize: 40,
+                ),
+              ],
+            ),
+          ],
+        ),
       ),
-      )
     );
   }
 }

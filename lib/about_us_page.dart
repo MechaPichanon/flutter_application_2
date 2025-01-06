@@ -5,6 +5,18 @@ class AboutUsPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Placeholder();
+    return Scaffold(
+      appBar: AppBar(
+        title: Text("About us"),
+      ),
+      body: const Padding(
+        padding: EdgeInsets.all(15),
+        child: Column(
+          children: [
+            Text("Hi we are EV charging Test group"),
+          ],
+        ),
+      ),
+    );
   }
 }
