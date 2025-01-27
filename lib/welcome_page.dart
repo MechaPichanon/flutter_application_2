@@ -51,6 +51,25 @@ class _WelcomePageState extends State<WelcomePage> {
                 ),
               ],
             ),
+            Row(
+              children: [
+                IconButton(
+                  onPressed: () {
+                    Navigator.pushNamed(context, '/ListItem');
+                  },
+                  icon: Icon(Icons.shopping_bag),
+                  iconSize: 40,
+                ),
+                Spacer(),
+                IconButton(
+                  onPressed: () {
+                    Navigator.pushNamed(context, '/MyFuture');
+                  },
+                  icon: Icon(Icons.cached),
+                  iconSize: 40,
+                ),
+              ],
+            )
           ],
         ),
       ),
