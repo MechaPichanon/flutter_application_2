@@ -63,7 +63,7 @@ class _WelcomePageState extends State<WelcomePage> {
                 Spacer(),
                 IconButton(
                   onPressed: () {
-                    Navigator.pushNamed(context, '/MyFuture');
+                    Navigator.pushNamed(context, '/MyProduct');
                   },
                   icon: Icon(Icons.cached),
                   iconSize: 40,

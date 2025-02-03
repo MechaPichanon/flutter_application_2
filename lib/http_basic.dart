@@ -4,7 +4,7 @@ import 'dart:async';
 
 Future<String> fetchData() async {
   final response =
-      await http.get(Uri.parse("​https://itpart.net/mobile/api/product1.php"));
+      await http.get(Uri.parse("​https://itpart.net/mobile/api/products.php"));
   if (response.statusCode == 200) {
     String strBody = response.body.toString();
     debugPrint(strBody);
